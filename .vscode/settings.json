@@ -1,0 +1,21 @@
+{
+  "files.autoSave": "off",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue-html",
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
+  //这一段是Vue3的配置，勿删！！！
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  // jsx自动修复有问题，取消js的format
+  "editor.formatOnSave": true,
+  //默认JavaScript格式化程序(为了更美观)
+  "javascript.format.enable": true,
+}
