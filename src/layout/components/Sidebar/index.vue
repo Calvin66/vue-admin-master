@@ -1,103 +1,88 @@
 <template>
-  <div>
-    <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-radio-group
-        v-model="isCollapse"
-        style="margin-bottom: 20px;"
-      >
-        <el-radio-button :label="false">展开</el-radio-button>
-        <el-radio-button :label="true">收起</el-radio-button>
-      </el-radio-group>
-      <el-menu
-        default-active="1-4-1"
-        :collapse="isCollapse"
-        :unique-opened="false"
-        @open="handleOpen"
-        @close="handleClose"
-      >
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location" />
-            <span slot="title">导航一</span>
-          </template>
-          <el-menu-item-group>
-            <span slot="title">分组一</span>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <span slot="title">选项4</span>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location" />
-            <span slot="title">导航一</span>
-          </template>
-          <el-menu-item-group>
-            <span slot="title">分组一</span>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <span slot="title">选项4</span>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu" />
-          <span slot="title">导航二</span>
-        </el-menu-item>
-        <el-menu-item
-          index="3"
-          disabled
-        >
-          <i class="el-icon-document" />
-          <span slot="title">导航三</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting" />
-          <span slot="title">导航四</span>
-        </el-menu-item>
-      </el-menu>
-    </el-scrollbar>
-
+  <div :class="{navCollapsed: isSidebarNavCollapse}">
+    <el-menu
+      :collapse="isSidebarNavCollapse"
+      class="sidebar-wrapper"
+      background-color="#304156"
+      text-color="#eee"
+      active-text-color="#4dbcff"
+      :default-active="currentMenu"
+    >
+      <SidebarItem :menu-list="sidebarMenu" />
+    </el-menu>
   </div>
+
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import SidebarItem from './SidebarItem'
 export default {
 
-  components: {},
+  components: { SidebarItem },
   data() {
     return {
-      isCollapse: true
+
     }
   },
   computed: {
-
+    ...mapGetters([
+      'sidebarMenu',
+      'currentMenu',
+      'isSidebarNavCollapse'
+    ])
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath)
-    }
+
   }
 }
 
 </script>
 <style lang='scss' scoped>
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
+.sidebar-wrapper {
+  transition: width 0.28s;
+  width: 210px !important;
+  background-color: #304156;
+  height: 100%;
+  position: fixed;
+  font-size: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  overflow: hidden;
+  > div.menu-container > li.el-menu-item,
+  > div.menu-container > li.el-submenu > .el-submenu__title {
+    border-bottom: 1px solid rgba(238, 238, 238, 0.1);
+  }
+  .el-menu-item {
+    background: #304156 !important;
+  }
+  /* 菜单hover时的背景 */
+  .el-submenu__title:hover,
+  .el-menu-item:hover {
+    background: #223041 !important;
+  }
+}
+/* 折叠菜单下的样式 */
+.navCollapsed {
+  .sidebar-wrapper {
+    width: 64px !important;
+    ul {
+      display: none;
+    }
+    .iconfont + span {
+      display: none;
+    }
+    .el-submenu__icon-arrow {
+      display: none;
+    }
+  }
+  .main-container {
+    margin-left: 64px;
+  }
+  .aside__top {
+    left: 64px !important;
+  }
 }
 </style>

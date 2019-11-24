@@ -1,4 +1,4 @@
-import { login } from '@/api/login'
+import { login } from '@/api/user'
 import { getToken, setToken } from '@/utils/auth'
 
 const state = {
@@ -26,7 +26,7 @@ const mutations = {
 
 const actions = {
   // 登录
-  Login({ commit }) {
+  login({ commit }) {
     return new Promise((resolve, reject) => {
       login().then(res => {
         setToken(res.token)
@@ -38,6 +38,12 @@ const actions = {
       }).catch(error => {
         reject(error)
       })
+    })
+  },
+  // 更新路由状态
+  updateLoadMenus({ commit }) {
+    return new Promise((resolve, reject) => {
+      commit('SET_LOAD_MENUS', false)
     })
   }
 }

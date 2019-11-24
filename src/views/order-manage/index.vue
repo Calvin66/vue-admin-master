@@ -1,8 +1,5 @@
 <template>
-  <div class="app-main-wrapper">
-    <router-view />
-  </div>
-
+  <div>订单管理</div>
 </template>
 
 <script>
@@ -13,6 +10,7 @@ export default {
     return {
     }
   },
+
   computed: {},
 
   watch: {},
@@ -22,15 +20,9 @@ export default {
   mounted() { },
 
   methods: {}
+
 }
 
 </script>
 <style lang='scss' scoped>
-.app-main-wrapper {
-  /* 50= navbar  50  */
-  min-height: calc(100vh - 84px);
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
 </style>
