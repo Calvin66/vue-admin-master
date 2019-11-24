@@ -1,6 +1,6 @@
 <template>
-  <div class="app-wrapper">
-    <sidebar />
+  <div :class="{navCollapsed: isSidebarNavCollapse}">
+    <sidebar class="sidebar-container" />
     <div class="main-container">
       <navbar />
       <tags-view />
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { Sidebar, Navbar, AppMain, TagsView } from './components'
 
 export default {
@@ -23,12 +24,14 @@ export default {
     return {
 
     }
+  },
+  computed: {
+    ...mapGetters([
+      'isSidebarNavCollapse'
+    ])
   }
 }
 </script>
 
 <style lang='scss'>
-.main-container {
-  margin-left: 210px;
-}
 </style>
