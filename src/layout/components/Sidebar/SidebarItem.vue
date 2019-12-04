@@ -14,7 +14,7 @@
           <span>{{ v.meta.name }}</span>
         </template>
         <el-menu-item-group>
-          <dynamic-menu :menu-list="v.children" />
+          <SidebarItem :menu-list="v.children" />
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item
@@ -39,9 +39,10 @@ export default {
   props: {
     menuList: {
       type: Array,
-      default: () => ([])
+      default: () => []
     }
   },
+  mounted() { },
   methods: {
     gotoRoute(name) {
       this.$router.push({ name })

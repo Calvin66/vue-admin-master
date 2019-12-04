@@ -11,7 +11,7 @@ const staticRoutes = [
     children: [
       {
         path: 'home',
-        component: () => import(/* webpackChunkName: "home" */'@/views/home'),
+        component: () => import(/* webpackChunkName: "home" */'@/views/Home'),
         name: '首页',
         meta: { title: '首页', icon: 'el-icon-s-goods' }
       }

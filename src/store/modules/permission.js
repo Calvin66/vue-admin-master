@@ -13,7 +13,6 @@ const state = {
 const mutations = {
   SET_PERMISSION(state, routes) {
     state.permissionList = routes
-    console.log(state.permissionList, '2222')
   },
   CLEAR_PERMISSION(state) {
     state.permissionList = []
@@ -33,7 +32,6 @@ const actions = {
     const permissionList = await fetchPermission()
     /* 根据权限刷选出我们设置好的路由并加入到 path='' 的children */
     const routes = recursionRouter(permissionList, dynamicRouter)
-    console.log(dynamicRouter, '路由返回')
 
     const MainContainer = staticRouter.find(v => v.path === '/')
     const children = MainContainer.children
